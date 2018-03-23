@@ -1,0 +1,64 @@
+<%
+
+function getIngredientsArray(pizza) {
+    var content = pizza.content;
+    var result = [];
+    Object.keys(content).forEach(function(key){
+        result = result.concat(content[key]);
+    });
+
+    return result;
+}
+
+%>
+
+<div class="col-lg-4 col-md-6 col-xs-12">
+    <div class="thumbnail pizza-card">
+        <img src="<%= pizza.icon %>">
+        <% if(pizza.is_new) { %>
+        <span class="label label-danger">Нова</span>
+        <% } else if(pizza.is_popular) {%>
+        <span class="label label-success">Популярна</span>
+        <% } %>
+        <div class="caption">
+            <h3 class="title"><%= pizza.title %></h3>
+            <p class="type"><%= pizza.type %></p>
+            <p class="description"><%= getIngredientsArray(pizza).join(", ") %></p>
+            <div class="row text-center">
+                <% if(pizza.small_size && pizza.big_size){ %>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="radius"><img src="assets/images/size-icon.svg"> <%= pizza.small_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.small_size.weight %></p>
+                    <b><span class="price"><%= pizza.small_size.price %></span></b><br/>
+                    <b><p class="money">грн</p></b>
+                    <a href="#" class="btn btn-success buy-small">Купити</a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="radius"><img src="assets/images/size-icon.svg"> <%= pizza.big_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.big_size.weight %></p>
+                    <b><span class="price"><%= pizza.big_size.price %></span></b><br/>
+                    <b><p class="money">грн</p></b>
+                    <a href="#" class="btn btn-success buy-big">Купити</a>
+                </div>
+
+                <% } else if(pizza.small_size){ %>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <p class="radius"><img src="assets/images/size-icon.svg"> <%= pizza.small_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.small_size.weight %></p>
+                    <b><span class="price"><%= pizza.small_size.price %></span></b><br/>
+                    <b><p class="money">грн</p></b>
+                    <a href="#" class="btn btn-success buy-small">Купити</a>
+                </div>
+                <% } else if(pizza.big_size){ %>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <p class="radius"><img src="assets/images/size-icon.svg"> <%= pizza.big_size.size %></p>
+                    <p class="weight"><img src="assets/images/weight.svg"> <%= pizza.big_size.weight %></p>
+                    <b><span class="price"><%= pizza.big_size.price %></span></b><br/>
+                    <b><p class="money">грн</p></b>
+                    <a href="#" class="btn btn-success buy-big">Купити</a>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
